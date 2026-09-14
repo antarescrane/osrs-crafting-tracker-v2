@@ -1,0 +1,1 @@
+# osrs-crafting-tracker-v2
