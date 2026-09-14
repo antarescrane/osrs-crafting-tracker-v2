@@ -1,0 +1,67 @@
+﻿[
+    {
+        "name": "Zaryte Crossbow",
+        "product_key": "zaryte crossbow",
+        "components": [
+            {"key": "nihil horn", "mult": 1},
+            {"key": "armadyl crossbow", "mult": 1},
+            {"key": "nihil shard", "mult": 250}
+        ]
+    },
+    {
+        "name": "Hueycoatl Hide Armour Set",
+        "product_key": "hueycoatl hide armour set",
+        "type": "set_assembly",
+        "components": [
+            {"key": "hueycoatl hide coif", "mult": 1},
+            {"key": "hueycoatl hide body", "mult": 1},
+            {"key": "hueycoatl hide chaps", "mult": 1},
+            {"key": "hueycoatl hide vambraces", "mult": 1}
+        ],
+        "hide_alternative": {
+            "key": "hueycoatl hide",
+            "hides_required": 8
+        }
+    },
+    {
+        "name": "Necklace of Rupture",
+        "product_key": "necklace of rupture",
+        "components": [
+            {"key": "necklace of anguish", "mult": 1},
+            {"key": "etched elder venator fang", "mult": 1}
+        ]
+    },
+    {
+        "name": "Amulet of Rancour",
+        "product_key": "amulet of rancour",
+        "components": [
+            {"key": "amulet of torture", "mult": 1},
+            {"key": "etched araxyte fang", "mult": 1}
+        ]
+    },
+    {
+        "name": "Venator Bow",
+        "product_key": "venator bow",
+        "components": [
+            {"key": "venator shard", "mult": 5}
+        ]
+    },
+    {
+        "name": "Kodai Wand",
+        "product_key": "kodai wand",
+        "components": [
+            {"key": "master wand", "mult": 1},
+            {"key": "kodai insignia", "mult": 1}
+        ]
+    },
+    {
+        "name": "Voidwaker",
+        "product_key": "voidwaker",
+        "components": [
+            {"key": "voidwaker hilt", "mult": 1},
+            {"key": "voidwaker blade", "mult": 1},
+            {"key": "voidwaker gem", "mult": 1},
+            {"name": "Assembly Fee", "flat_cost": 500000}
+        ]
+    }
+]

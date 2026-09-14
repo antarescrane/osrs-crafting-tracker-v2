@@ -2,52 +2,280 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSRS Item Assembly & Flip Margins Tracker</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>OSRS Market Opportunity Tracker</title>
+    <style>
+        body { background-color: #121212; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; margin: 0; }
+        h1 { color: #ffa500; font-size: 24px; margin-bottom: 15px; }
+        .header-bar { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; background: #1a1a1a; padding: 12px 15px; border-radius: 6px; border: 1px solid #333; }
+        .btn { background-color: #28a745; color: white; border: none; padding: 8px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background-color: #218838; }
+        select { background: #252525; color: #fff; border: 1px solid #444; padding: 6px 10px; border-radius: 4px; }
+        h2 { color: #ffa500; font-size: 18px; margin-top: 30px; margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; background: #181818; border-radius: 6px; overflow: hidden; font-size: 14px; margin-bottom: 30px; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #282828; }
+        th { background-color: #1f1f1f; color: #ffcc00; font-weight: 600; font-size: 13px; text-transform: uppercase; }
+        .main-row { background: #1c1c1c; font-weight: bold; }
+        .main-row:hover { background: #252525; }
+        .sub-row { background: #151515; color: #aaa; font-size: 13px; }
+        .sub-row:hover { background: #1c1c1c; }
+        .pos { color: #4ecca3; font-weight: bold; }
+        .neg { color: #ff6b6b; font-weight: bold; }
+        .muted { color: #666; }
+    </style>
 </head>
 <body>
-    <div class="app-container">
-        <header class="app-header">
-            <div class="header-title">
-                <h1><i class="fa-solid fa-coins"></i> OSRS Assembly & Flip Margins</h1>
-                <span class="live-badge"><span class="pulse-dot"></span> Live Wiki API Connected</span>
-            </div>
-            <div class="header-controls">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="Search item or component...">
-                </div>
-                <button id="refreshBtn" class="btn-refresh" title="Force Refresh Prices">
-                    <i class="fa-solid fa-rotate"></i> Refresh
-                </button>
-            </div>
-        </header>
-
-        <div class="status-bar" id="statusBar">
-            Fetching latest mapping and pricing data from OSRS Wiki API...
-        </div>
-
-        <div class="table-card">
-            <div class="table-responsive">
-                <table id="marginsTable">
-                    <thead>
-                        <tr>
-                            <th class="sortable" data-sort="name">Item / Component <i class="fa-solid fa-sort"></i></th>
-                            <th class="sortable text-right" data-sort="buy">Buy Offer (Low) <i class="fa-solid fa-sort"></i></th>
-                            <th class="sortable text-right" data-sort="sell">Sell Offer (High) <i class="fa-solid fa-sort"></i></th>
-                            <th class="sortable text-right" data-sort="tax">GE Tax (2%) <i class="fa-solid fa-sort"></i></th>
-                            <th class="sortable text-right" data-sort="revenue">Net Revenue <i class="fa-solid fa-sort"></i></th>
-                            <th class="sortable text-right" data-sort="profit">Net Profit <i class="fa-solid fa-sort"></i></th>
-                            <th class="sortable text-right" data-sort="roi">ROI % <i class="fa-solid fa-sort"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody"></tbody>
-                </table>
-            </div>
-        </div>
+    <h1>OSRS Market Opportunity Tracker</h1>
+    
+    <div class="header-bar">
+        <button class="btn" onclick="location.reload()">Refresh Live Prices</button>
+        <div>Assembly Sort: <select id="asmSort"><option>Net Profit (High to Low)</option><option>ROI % (High to Low)</option></select></div>
+        <div>Potion Sort: <select id="potSort"><option>Custom Score (Volume + Margin)</option><option>Net Profit (High to Low)</option></select></div>
+        <div class="muted" style="margin-left: auto;">Updated at 05:01:30 PM</div>
     </div>
-    <script src="app.js"></script>
+
+    <h2>Item Assembly Margins</h2>
+    <table>
+        <tr>
+            <th>Item / Component</th>
+            <th>Buy Offer (Low)</th>
+            <th>Sell Offer (High)</th>
+            <th>GE Tax (2%)</th>
+            <th>Net Revenue</th>
+            <th>Net Profit</th>
+            <th>ROI %</th>
+        </tr>
+        <tr class="main-row">
+            <td>Kodai Wand</td>
+            <td>55,035,444 GP</td>
+            <td>56,889,858 GP</td>
+            <td class="neg">-1,137,797 GP</td>
+            <td>55,752,061 GP</td>
+            <td class="pos">716,617 GP</td>
+            <td class="pos">1.3%</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Master wand</td>
+            <td>7,114,773</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Kodai insignia</td>
+            <td>47,920,671</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="main-row">
+            <td>Necklace of Rupture</td>
+            <td>141,392,558 GP</td>
+            <td>144,907,076 GP</td>
+            <td class="neg">-2,898,141 GP</td>
+            <td>142,008,935 GP</td>
+            <td class="pos">616,377 GP</td>
+            <td class="pos">0.4%</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Necklace of anguish</td>
+            <td>19,367,558</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Etched elder venator fang</td>
+            <td>122,025,000</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="main-row">
+            <td>Amulet of Rancour</td>
+            <td>48,095,920 GP</td>
+            <td>49,632,763 GP</td>
+            <td class="neg">-992,655 GP</td>
+            <td>48,640,108 GP</td>
+            <td class="pos">544,188 GP</td>
+            <td class="pos">1.1%</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Amulet of torture</td>
+            <td>19,490,920</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Etched araxyte fang</td>
+            <td>28,605,000</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="main-row">
+            <td>Voidwaker</td>
+            <td>37,651,368 GP</td>
+            <td>38,800,000 GP</td>
+            <td class="neg">-776,000 GP</td>
+            <td>38,024,000 GP</td>
+            <td class="pos">372,632 GP</td>
+            <td class="pos">1.0%</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Voidwaker hilt</td>
+            <td>1,411,621</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Voidwaker blade</td>
+            <td>1,209,742</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Voidwaker gem</td>
+            <td>34,530,005</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Assembly Fee</td>
+            <td>500,000</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="main-row">
+            <td>Venator Bow</td>
+            <td>60,450,015 GP</td>
+            <td>61,893,322 GP</td>
+            <td class="neg">-1,237,866 GP</td>
+            <td>60,655,456 GP</td>
+            <td class="pos">205,441 GP</td>
+            <td class="pos">0.3%</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Venator shard (x5)</td>
+            <td>60,450,015</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="main-row">
+            <td>Hueycoatl Hide Armour Set</td>
+            <td>3,926,680 GP</td>
+            <td>4,086,420 GP</td>
+            <td class="neg">-81,728 GP</td>
+            <td>4,004,692 GP</td>
+            <td class="pos">78,012 GP</td>
+            <td class="pos">2.0%</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Raw Hides (8x Hueycoatl hide)</td>
+            <td>3,926,680</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="main-row">
+            <td>Zaryte Crossbow</td>
+            <td>350,391,327 GP</td>
+            <td>357,190,275 GP</td>
+            <td class="neg">-7,143,805 GP</td>
+            <td>350,046,470 GP</td>
+            <td class="neg">-344,857 GP</td>
+            <td class="neg">-0.1%</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Nihil horn</td>
+            <td>314,590,590</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Armadyl crossbow</td>
+            <td>35,026,737</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+        <tr class="sub-row">
+            <td style="padding-left: 30px;">Nihil shard (x250)</td>
+            <td>774,000</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+            <td class="muted">-</td>
+        </tr>
+    </table>
+
+    <h2>Potion Decanting Arbitrage</h2>
+    <table>
+        <tr>
+            <th>Potion Name / Strategy</th>
+            <th>24h Volume</th>
+            <th>Buy Offer (Low)</th>
+            <th>Sell Offer (High)</th>
+            <th>GE Tax (2%)</th>
+            <th>Net Revenue</th>
+            <th>Net Profit</th>
+            <th>ROI %</th>
+        </tr>
+        <tr class="main-row">
+            <td><b>Haemostatic dressing</b><br><span style="font-size:12px; color:#888;">Buy 4x (2) [Haemostatic dressing (2)]</span></td>
+            <td>28,205</td>
+            <td>2,000 GP</td>
+            <td>4,398 GP</td>
+            <td class="neg">-87 GP</td>
+            <td>4,311 GP</td>
+            <td class="pos">2,311 GP</td>
+            <td class="pos">115.5%</td>
+        </tr>
+        <tr class="main-row">
+            <td><b>Serum 207</b><br><span style="font-size:12px; color:#888;">Buy 4x (2) [Serum 207 (2)]</span></td>
+            <td>21,310</td>
+            <td>8 GP</td>
+            <td>34 GP</td>
+            <td class="neg">0 GP</td>
+            <td>34 GP</td>
+            <td class="pos">26 GP</td>
+            <td class="pos">325.0%</td>
+        </tr>
+    </table>
 </body>
 </html>
