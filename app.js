@@ -1,10 +1,10 @@
-﻿// OSRS Crafting & Flipping Tracker - Updated Item Definitions
+﻿// OSRS Crafting & Flipping Tracker - Corrected Item Definitions
 const items = [
     {
         name: "Necklace of Rupture",
-        id: 33637, // placeholder/example assembled ID
+        id: 33637,
         components: [
-            { name: "Necklace of Anguish", id: 19553 },
+            { name: "Necklace of Anguish", id: 19547 },
             { name: "Etched Elder Venator Fang", id: 33636 }
         ]
     },
@@ -25,7 +25,7 @@ const items = [
     },
     {
         name: "Kodai Wand",
-        id: 2104,
+        id: 21043,
         components: [
             { name: "Master Wand", id: 6914 },
             { name: "Kodai Insignia", id: 21043 }
