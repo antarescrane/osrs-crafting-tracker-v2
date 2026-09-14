@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSRS Item Assembly & Flip Margins Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-title">
+                <h1><i class="fa-solid fa-coins"></i> OSRS Assembly & Flip Margins</h1>
+                <span class="live-badge"><span class="pulse-dot"></span> Live Wiki API Connected</span>
+            </div>
+            <div class="header-controls">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search item or component...">
+                </div>
+                <button id="refreshBtn" class="btn-refresh" title="Force Refresh Prices">
+                    <i class="fa-solid fa-rotate"></i> Refresh
+                </button>
+            </div>
+        </header>
+
+        <div class="status-bar" id="statusBar">
+            Fetching latest mapping and pricing data from OSRS Wiki API...
+        </div>
+
+        <div class="table-card">
+            <div class="table-responsive">
+                <table id="marginsTable">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="name">Item / Component <i class="fa-solid fa-sort"></i></th>
+                            <th class="sortable text-right" data-sort="buy">Buy Offer (Low) <i class="fa-solid fa-sort"></i></th>
+                            <th class="sortable text-right" data-sort="sell">Sell Offer (High) <i class="fa-solid fa-sort"></i></th>
+                            <th class="sortable text-right" data-sort="tax">GE Tax (2%) <i class="fa-solid fa-sort"></i></th>
+                            <th class="sortable text-right" data-sort="revenue">Net Revenue <i class="fa-solid fa-sort"></i></th>
+                            <th class="sortable text-right" data-sort="profit">Net Profit <i class="fa-solid fa-sort"></i></th>
+                            <th class="sortable text-right" data-sort="roi">ROI % <i class="fa-solid fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
